@@ -1,4 +1,5 @@
 ﻿using Academic.Infra.CrossCutting.IoC;
+using Core.CrossCutting.IoC;
 using SimpleInjector;
 
 namespace ArchitectureModelDotNet.WebApi.Setup
@@ -7,13 +8,10 @@ namespace ArchitectureModelDotNet.WebApi.Setup
     {
         public static void InitializeContainer(Container container, Lifestyle lifestyle, IConfiguration configuration)
         {
-            RegisterWebApiMappings(container, lifestyle);
-
-            AcademicMappings.InitializeContainer(container, lifestyle, configuration);
+            MappingsCore.InitializeContainer(container, lifestyle);
+            MappingsAcademic.InitializeContainer(container, lifestyle, configuration);
+            MappingsWebApi.InitializeContainer(container, lifestyle);
         }
 
-        private static void RegisterWebApiMappings(Container container, Lifestyle lifestyle)
-        {
-        }
     }
 }

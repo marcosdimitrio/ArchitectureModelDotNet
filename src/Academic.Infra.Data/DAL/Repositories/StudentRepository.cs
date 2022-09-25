@@ -10,5 +10,10 @@ namespace Academic.Infra.Data.DAL.Repositories
             : base(context)
         {
         }
+
+        public IList<Student> GetAll()
+        {
+            return Get().ToList();
+        }
     }
 }

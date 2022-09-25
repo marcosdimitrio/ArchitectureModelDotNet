@@ -37,4 +37,6 @@ app.MapControllers();
 
 container.Verify();
 
+DatabaseInitializer.InitializeDbContextDatabases(container);
+
 app.Run();

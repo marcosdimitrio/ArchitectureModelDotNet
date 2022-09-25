@@ -7,12 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SqlScripts\Academic\01 - Empty.sql" />
+    <None Remove="SqlScripts\Academic\Seed\01 - Students.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SqlScripts\Academic\01 - Empty.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlScripts\Academic\Seed\01 - Students.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.9" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Academic.Domain\Academic.Domain.csproj" />
+    <ProjectReference Include="..\Core.Services.DatabaseInitializer.Interfaces\Core.Services.DatabaseInitializer.Interfaces.csproj" />
+    <ProjectReference Include="..\Core.Services.EnumTableCreators.Interfaces\Core.Services.EnumTableCreators.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

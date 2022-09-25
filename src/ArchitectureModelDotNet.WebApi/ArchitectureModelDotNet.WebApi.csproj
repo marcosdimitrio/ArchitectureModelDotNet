@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Academic.Application\Academic.Application.csproj" />
     <ProjectReference Include="..\Academic.Infra.CrossCutting.IoC\Academic.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\Core.CrossCutting.IoC\Core.CrossCutting.IoC.csproj" />
   </ItemGroup>
 
 </Project>

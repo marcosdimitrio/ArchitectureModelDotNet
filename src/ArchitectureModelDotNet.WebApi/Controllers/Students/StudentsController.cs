@@ -1,4 +1,6 @@
-﻿using ArchitectureModelDotNet.WebApi.Controllers.Students.Dto;
+﻿using Academic.Application.Services.Students.Interfaces;
+using ArchitectureModelDotNet.WebApi.Controllers.Students.Dto;
+using ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArchitectureModelDotNet.WebApi.Controllers.Students
@@ -7,40 +9,28 @@ namespace ArchitectureModelDotNet.WebApi.Controllers.Students
     [ApiController]
     public sealed class StudentsController : ControllerBase
     {
+        private readonly IStudentAppService _studentAppService;
+        private readonly IMapperStudentToViewDto _mapperStudentToViewDto;
+
+        public StudentsController(IStudentAppService studentAppService, IMapperStudentToViewDto mapperStudentToViewDto)
+        {
+            _studentAppService = studentAppService;
+            _mapperStudentToViewDto = mapperStudentToViewDto;
+        }
+
         [HttpGet]
         public PageDto<StudentViewDto> Get()
         {
-            var list = new List<StudentViewDto>()
-            {
-                new StudentViewDto()
-                {
-                    Id = 1,
-                    Name = "Test1",
-                    Email = "test1@nowhere.com",
-                    RegisteredOn = new DateTime(2022, 1, 5),
-                },
-                new StudentViewDto()
-                {
-                    Id = 2,
-                    Name = "Test2",
-                    Email = "test2@nowhere.com",
-                    RegisteredOn = new DateTime(2022, 7, 23),
-                },
-                new StudentViewDto()
-                {
-                    Id = 3,
-                    Name = "Test3",
-                    Email = "test3@nowhere.com",
-                    RegisteredOn = new DateTime(2022, 9, 11),
-                },
-            };
+            var students = _studentAppService.GetAll();
+
+            var studentsViewDto = _mapperStudentToViewDto.Map(students);
 
             return new PageDto<StudentViewDto>()
             {
-                Content = list,
+                Content = studentsViewDto,
                 Number = 0,
-                Size = list.Count,
-                TotalElements = list.Count,
+                Size = studentsViewDto.Count,
+                TotalElements = studentsViewDto.Count,
             };
         }
     }

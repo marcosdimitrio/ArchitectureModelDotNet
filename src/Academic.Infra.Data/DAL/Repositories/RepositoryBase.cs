@@ -14,11 +14,6 @@ namespace Academic.Infra.Data.DAL.Repositories
             DbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
-        {
-            return Get();
-        }
-
         public TEntity? GetById(object id)
         {
             return DbSet.Find(id);
