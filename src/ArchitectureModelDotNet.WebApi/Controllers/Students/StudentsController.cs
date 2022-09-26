@@ -1,6 +1,7 @@
 ﻿using Academic.Application.Services.Students.Interfaces;
 using ArchitectureModelDotNet.WebApi.Controllers.Students.Dto;
 using ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers.Interfaces;
+using Core.Services.DataTables.Interfaces.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArchitectureModelDotNet.WebApi.Controllers.Students
@@ -19,18 +20,18 @@ namespace ArchitectureModelDotNet.WebApi.Controllers.Students
         }
 
         [HttpGet]
-        public PageDto<StudentViewDto> Get()
+        public PageViewDto<StudentViewDto> Get([FromQuery] DataTablesParameters dataTablesParameters)
         {
-            var students = _studentAppService.GetAll();
+            var students = _studentAppService.Get(dataTablesParameters);
 
-            var studentsViewDto = _mapperStudentToViewDto.Map(students);
+            var dataTablesResponse = _mapperStudentToViewDto.Map(students);
 
-            return new PageDto<StudentViewDto>()
+            return new PageViewDto<StudentViewDto>()
             {
-                Content = studentsViewDto,
-                Number = 0,
-                Size = studentsViewDto.Count,
-                TotalElements = studentsViewDto.Count,
+                Content = dataTablesResponse.Content,
+                Number = dataTablesResponse.Number,
+                Size = dataTablesResponse.Size,
+                TotalElements = dataTablesResponse.TotalElements,
             };
         }
     }

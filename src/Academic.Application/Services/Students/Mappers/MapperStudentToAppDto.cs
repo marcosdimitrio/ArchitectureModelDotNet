@@ -1,12 +1,27 @@
 ﻿using Academic.Application.Services.Students.Dto;
 using Academic.Application.Services.Students.Mappers.Interfaces;
 using Academic.Domain.Entities.Students;
+using Core.Services.DataTables.Interfaces.Dto;
 
 namespace Academic.Application.Services.Students.Mappers
 {
     public class MapperStudentToAppDto : IMapperStudentToAppDto
     {
-        public IList<StudentAppDto> Map(IList<Student> source)
+
+        public DataTablesResponse<StudentAppDto> Map(DataTablesResponse<Student> item)
+        {
+            var newItem = new DataTablesResponse<StudentAppDto>()
+            {
+                Content = Map(item.Content),
+                TotalElements = item.TotalElements,
+                Size = item.Size,
+                Number = item.Number,
+            };
+
+            return newItem;
+        }
+
+        private static IList<StudentAppDto> Map(IList<Student> source)
         {
             var destination = new List<StudentAppDto>();
 

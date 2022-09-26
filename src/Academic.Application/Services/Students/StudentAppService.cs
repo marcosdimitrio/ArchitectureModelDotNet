@@ -2,6 +2,7 @@
 using Academic.Application.Services.Students.Interfaces;
 using Academic.Application.Services.Students.Mappers.Interfaces;
 using Academic.Domain.DAL;
+using Core.Services.DataTables.Interfaces.Dto;
 
 namespace Academic.Application.Services.Students
 {
@@ -16,9 +17,9 @@ namespace Academic.Application.Services.Students
             _mapperStudentToAppDto = mapperStudentToAppDto;
         }
 
-        public IList<StudentAppDto> GetAll()
+        public DataTablesResponse<StudentAppDto> Get(DataTablesParameters dataTablesParameters)
         {
-            var students = _unitOfWork.StudentRepository.GetAll();
+            var students = _unitOfWork.StudentRepository.Get(dataTablesParameters);
 
             var studentsAppDto = _mapperStudentToAppDto.Map(students);
 

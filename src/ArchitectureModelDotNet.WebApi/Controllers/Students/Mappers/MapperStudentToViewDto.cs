@@ -1,12 +1,27 @@
 ﻿using Academic.Application.Services.Students.Dto;
 using ArchitectureModelDotNet.WebApi.Controllers.Students.Dto;
 using ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers.Interfaces;
+using Core.Services.DataTables.Interfaces.Dto;
 
 namespace ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers
 {
     public class MapperStudentToViewDto : IMapperStudentToViewDto
     {
-        public IList<StudentViewDto> Map(IList<StudentAppDto> source)
+
+        public DataTablesResponse<StudentViewDto> Map(DataTablesResponse<StudentAppDto> source)
+        {
+            var newItem = new DataTablesResponse<StudentViewDto>()
+            {
+                Content = Map(source.Content),
+                TotalElements = source.TotalElements,
+                Size = source.Size,
+                Number = source.Number,
+            };
+
+            return newItem;
+        }
+
+        private static IList<StudentViewDto> Map(IList<StudentAppDto> source)
         {
             var destination = new List<StudentViewDto>();
 
@@ -18,7 +33,7 @@ namespace ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers
             return destination;
         }
 
-        private StudentViewDto Map(StudentAppDto item)
+        private static StudentViewDto Map(StudentAppDto item)
         {
             var newItem = new StudentViewDto()
             {

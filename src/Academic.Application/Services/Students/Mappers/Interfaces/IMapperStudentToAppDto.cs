@@ -1,10 +1,11 @@
 ﻿using Academic.Application.Services.Students.Dto;
 using Academic.Domain.Entities.Students;
+using Core.Services.DataTables.Interfaces.Dto;
 
 namespace Academic.Application.Services.Students.Mappers.Interfaces
 {
     public interface IMapperStudentToAppDto
     {
-        IList<StudentAppDto> Map(IList<Student> source);
+        DataTablesResponse<StudentAppDto> Map(DataTablesResponse<Student> item);
     }
 }

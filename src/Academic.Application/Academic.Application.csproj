@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Academic.Domain\Academic.Domain.csproj" />
+    <ProjectReference Include="..\Core.Services.DataTables.Interfaces\Core.Services.DataTables.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

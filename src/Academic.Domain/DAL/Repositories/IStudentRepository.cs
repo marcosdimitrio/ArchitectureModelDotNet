@@ -1,9 +1,10 @@
 ﻿using Academic.Domain.Entities.Students;
+using Core.Services.DataTables.Interfaces.Dto;
 
 namespace Academic.Domain.DAL.Repositories
 {
     public interface IStudentRepository : IRepositoryBase<Student>
     {
-        IList<Student> GetAll();
+        DataTablesResponse<Student> Get(DataTablesParameters dataTablesParameters);
     }
 }
