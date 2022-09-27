@@ -2,14 +2,14 @@
 using Academic.Domain.Entities.Students;
 using Academic.Infra.Data.Context;
 using Core.Services.DataTables.Interfaces.Dto;
-using Sieve.Services;
+using Core.Services.DataTables.Interfaces.Services;
 
 namespace Academic.Infra.Data.DAL.Repositories
 {
     public class StudentRepository : RepositoryBase<Student>, IStudentRepository
     {
-        public StudentRepository(AcademicContext context, ISieveProcessor sieveProcessor)
-            : base(context, sieveProcessor)
+        public StudentRepository(AcademicContext context, IDataTablesService dataTablesService)
+            : base(context, dataTablesService)
         {
         }
 
