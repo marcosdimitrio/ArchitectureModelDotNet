@@ -1,6 +1,8 @@
 using ArchitectureModelDotNet.WebApi.Setup;
 using SimpleInjector;
 
+AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromSeconds(2));
+
 var container = new Container();
 
 var builder = WebApplication.CreateBuilder(args);
