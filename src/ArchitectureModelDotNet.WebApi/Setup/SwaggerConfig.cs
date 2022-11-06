@@ -8,14 +8,28 @@ namespace ArchitectureModelDotNet.WebApi.Setup
         {
             setupAction.CustomSchemaIds(schemaIdSelector =>
             {
+                var name = GetName(schemaIdSelector);
+
                 var suffix = "ViewDto";
-                if (schemaIdSelector.Name.EndsWith(suffix))
+                if (name.EndsWith(suffix))
                 {
-                    return schemaIdSelector.Name.Substring(0, schemaIdSelector.Name.Length - suffix.Length);
+                    return name.Substring(0, name.Length - suffix.Length);
                 }
 
-                return schemaIdSelector.Name;
+                return name;
             });
         };
+
+        private static string GetName(Type schemaIdSelector)
+        {
+            if (schemaIdSelector.IsGenericType)
+            {
+                var name = schemaIdSelector.GetGenericTypeDefinition().Name;
+
+                return name.Remove(name.IndexOf('`'));
+            }
+
+            return schemaIdSelector.Name;
+        }
     }
 }
