@@ -7,6 +7,8 @@ namespace Academic.Infra.CrossCutting.IoC
     {
         public void Configure(SievePropertyMapper mapper)
         {
+            ArgumentNullException.ThrowIfNull(mapper);
+
             mapper.Property<Student>(x => x.Id)
                 .CanSort();
 

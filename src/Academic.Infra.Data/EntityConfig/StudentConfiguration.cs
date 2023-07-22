@@ -8,6 +8,8 @@ namespace Academic.Infra.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
+            ArgumentNullException.ThrowIfNull(builder);
+
             builder.Property(x => x.Name)
                 .HasMaxLength(100);
 

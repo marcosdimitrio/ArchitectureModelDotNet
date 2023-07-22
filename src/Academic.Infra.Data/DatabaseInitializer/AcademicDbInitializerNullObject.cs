@@ -7,6 +7,7 @@ namespace Academic.Infra.Data.DatabaseInitializer
     {
         public void InitializeDatabase()
         {
+            // do nothing
         }
     }
 }

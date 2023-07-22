@@ -10,6 +10,8 @@ namespace ArchitectureModelDotNet.WebApi.Controllers.Students.Mappers
 
         public DataTablesResponse<StudentViewDto> Map(DataTablesResponse<StudentAppDto> source)
         {
+            ArgumentNullException.ThrowIfNull(source);
+
             var newItem = new DataTablesResponse<StudentViewDto>()
             {
                 Content = Map(source.Content),

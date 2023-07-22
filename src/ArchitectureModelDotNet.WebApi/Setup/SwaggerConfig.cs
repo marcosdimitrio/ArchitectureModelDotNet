@@ -11,7 +11,7 @@ namespace ArchitectureModelDotNet.WebApi.Setup
                 var name = GetName(schemaIdSelector);
 
                 var suffix = "ViewDto";
-                if (name.EndsWith(suffix))
+                if (name.EndsWith(suffix, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return name.Substring(0, name.Length - suffix.Length);
                 }
@@ -26,7 +26,7 @@ namespace ArchitectureModelDotNet.WebApi.Setup
             {
                 var name = schemaIdSelector.GetGenericTypeDefinition().Name;
 
-                return name.Remove(name.IndexOf('`'));
+                return name.Remove(name.IndexOf('`', StringComparison.InvariantCultureIgnoreCase));
             }
 
             return schemaIdSelector.Name;

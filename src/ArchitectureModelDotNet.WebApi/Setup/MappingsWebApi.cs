@@ -10,6 +10,9 @@ namespace ArchitectureModelDotNet.WebApi.Setup
     {
         public static void InitializeContainer(Container container, Lifestyle lifestyle)
         {
+            ArgumentNullException.ThrowIfNull(container);
+            ArgumentNullException.ThrowIfNull(lifestyle);
+
             RegisterServices(container, lifestyle);
 
             RegisterMappers(container, lifestyle);

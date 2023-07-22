@@ -13,6 +13,8 @@ namespace Academic.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            ArgumentNullException.ThrowIfNull(modelBuilder);
+
             modelBuilder.HasDefaultSchema(GetBoundedContextName());
 
             ModelConfiguration(modelBuilder);
@@ -20,6 +22,8 @@ namespace Academic.Infra.Data.Context
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
+            ArgumentNullException.ThrowIfNull(configurationBuilder);
+
             configurationBuilder
                 .Properties<string>()
                 .HaveMaxLength(255);
@@ -37,14 +41,15 @@ namespace Academic.Infra.Data.Context
                 .HavePrecision(18, 2);
         }
 
-        private void ModelConfiguration(ModelBuilder modelBuilder)
-        {
-            new StudentConfiguration().Configure(modelBuilder.Entity<Student>());
-        }
-
         private string GetBoundedContextName()
         {
             return GetType().Namespace!.Split('.')[0];
         }
+
+        private static void ModelConfiguration(ModelBuilder modelBuilder)
+        {
+            new StudentConfiguration().Configure(modelBuilder.Entity<Student>());
+        }
+
     }
 }

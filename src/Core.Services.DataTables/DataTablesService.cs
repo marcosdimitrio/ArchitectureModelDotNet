@@ -16,12 +16,12 @@ namespace Core.Services.DataTables
 
         public DataTablesResponse<TEntity> GetDataTablesResponse<TEntity>(IQueryable<TEntity> queryable, DataTablesParameters dataTablesParameters) where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(dataTablesParameters);
+
             var sieveModel = MapToSieveModel(dataTablesParameters);
 
             queryable = ApplyFilteringAndSorting(sieveModel, queryable);
-
             var totalElements = queryable.Count();
-
             queryable = ApplyPagination(sieveModel, queryable);
 
             var dataTablesResponse = new DataTablesResponse<TEntity>()

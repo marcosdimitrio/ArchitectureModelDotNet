@@ -9,23 +9,24 @@ namespace ArchitectureModelDotNet.WebApi.Setup
     {
         public static void InitializeDbContextDatabases(Container container)
         {
-            using (var scope = AsyncScopedLifestyle.BeginScope(container))
-            {
-                var initializers = container
-                    .GetCurrentRegistrations()
-                    .Where(x =>
-                        x.ImplementationType.GetInterfaces().Any(x =>
-                            x.IsGenericType &&
-                            x.GetGenericTypeDefinition() == typeof(IDatabaseInitializer<>)
-                        )
-                    )
-                    .Select(x => x.GetInstance())
-                    .ToList();
+            ArgumentNullException.ThrowIfNull(container);
 
-                foreach (object initializer in initializers)
-                {
-                    InitializeDatabase(initializer);
-                }
+            using var scope = AsyncScopedLifestyle.BeginScope(container);
+
+            var initializers = container
+                .GetCurrentRegistrations()
+                .Where(x =>
+                    x.ImplementationType.GetInterfaces().Any(x =>
+                        x.IsGenericType &&
+                        x.GetGenericTypeDefinition() == typeof(IDatabaseInitializer<>)
+                    )
+                )
+                .Select(x => x.GetInstance())
+                .ToList();
+
+            foreach (object initializer in initializers)
+            {
+                InitializeDatabase(initializer);
             }
         }
 

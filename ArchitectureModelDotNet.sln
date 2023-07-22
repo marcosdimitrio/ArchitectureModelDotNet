@@ -79,7 +79,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Services.DataTables.Interfaces", "src\Core.Services.DataTables.Interfaces\Core.Services.DataTables.Interfaces.csproj", "{6C52C237-A7A7-4540-B68F-970F7EFE1475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Services.DataTables", "src\Core.Services.DataTables\Core.Services.DataTables.csproj", "{9485335C-B0DD-44E2-A334-CD3A7960CDCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Services.DataTables", "src\Core.Services.DataTables\Core.Services.DataTables.csproj", "{9485335C-B0DD-44E2-A334-CD3A7960CDCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6B81B314-C08E-44C0-81A6-4772352F5390}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

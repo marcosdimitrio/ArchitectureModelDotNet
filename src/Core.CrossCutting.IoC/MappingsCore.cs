@@ -10,6 +10,8 @@ namespace Core.CrossCutting.IoC
     {
         public static void InitializeContainer(Container container, Lifestyle lifestyle)
         {
+            ArgumentNullException.ThrowIfNull(container);
+
             container.Register<IEnumTableCreator, EnumTableCreator>(lifestyle);
 
             container.Register<IDataTablesService, DataTablesService>(lifestyle);

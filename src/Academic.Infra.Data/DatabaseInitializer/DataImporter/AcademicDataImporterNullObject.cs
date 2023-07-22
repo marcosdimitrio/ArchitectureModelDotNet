@@ -7,6 +7,7 @@ namespace Academic.Infra.Data.DatabaseInitializer.DataImporter
     {
         public void Seed()
         {
+            // do nothing
         }
     }
 }

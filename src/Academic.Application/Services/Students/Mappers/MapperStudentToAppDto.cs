@@ -10,6 +10,8 @@ namespace Academic.Application.Services.Students.Mappers
 
         public DataTablesResponse<StudentAppDto> Map(DataTablesResponse<Student> item)
         {
+            ArgumentNullException.ThrowIfNull(item);
+
             var newItem = new DataTablesResponse<StudentAppDto>()
             {
                 Content = Map(item.Content),

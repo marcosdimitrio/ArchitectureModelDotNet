@@ -8,11 +8,13 @@ namespace Academic.Infra.Data.DAL.Repositories
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
         private readonly IDataTablesService _dataTablesService;
-        protected DbContext Context;
-        protected DbSet<TEntity> DbSet;
+        protected DbContext Context { get; private set; }
+        protected DbSet<TEntity> DbSet { get; private set; }
 
         protected RepositoryBase(DbContext context, IDataTablesService dataTablesService)
         {
+            ArgumentNullException.ThrowIfNull(context);
+
             Context = context;
             DbSet = context.Set<TEntity>();
             _dataTablesService = dataTablesService;
@@ -38,10 +40,10 @@ namespace Academic.Infra.Data.DAL.Repositories
             DbSet.Remove(entity);
         }
 
-        public void Update(TEntity entityToUpdate)
+        public void Update(TEntity entity)
         {
-            DbSet.Attach(entityToUpdate);
-            Context.Entry(entityToUpdate).State = EntityState.Modified;
+            DbSet.Attach(entity);
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         protected IQueryable<TEntity> Get()
@@ -49,7 +51,6 @@ namespace Academic.Infra.Data.DAL.Repositories
             return DbSet;
         }
 
-        //TODO: extract this as a dependency
         protected DataTablesResponse<TEntity> GetDataTablesResponse(DataTablesParameters dataTablesParameters)
         {
             var dataTablesResponse = _dataTablesService.GetDataTablesResponse(Get().AsNoTracking(), dataTablesParameters);

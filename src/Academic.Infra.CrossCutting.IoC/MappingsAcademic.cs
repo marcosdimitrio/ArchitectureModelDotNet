@@ -20,6 +20,10 @@ namespace Academic.Infra.CrossCutting.IoC
     {
         public static void InitializeContainer(Container container, Lifestyle lifestyle, IConfiguration configuration)
         {
+            ArgumentNullException.ThrowIfNull(container);
+            ArgumentNullException.ThrowIfNull(lifestyle);
+            ArgumentNullException.ThrowIfNull(configuration);
+
             RegisterApplication(container, lifestyle);
 
             RegisterDatabaseInitializer(container, lifestyle);
@@ -50,14 +54,13 @@ namespace Academic.Infra.CrossCutting.IoC
 
         private static void RegisterDAL(Container container, Lifestyle lifestyle)
         {
-            var repositoryImplementationTypes = container.GetTypesToRegister(typeof(RepositoryBase<>), new[] { typeof(RepositoryBase<>).Assembly });
+            var repositoryImplementationTypes = container.GetTypesToRegister(typeof(RepositoryBase<>), typeof(RepositoryBase<>).Assembly);
 
             foreach (var repositoryImplementationType in repositoryImplementationTypes)
             {
                 var serviceType = repositoryImplementationType
                     .GetInterfaces()
-                    .Where(x => x.Name != typeof(IRepositoryBase<>).Name)
-                    .Single();
+                    .Single(x => x.Name != typeof(IRepositoryBase<>).Name);
 
                 container.RegisterConditional(
                     serviceType,

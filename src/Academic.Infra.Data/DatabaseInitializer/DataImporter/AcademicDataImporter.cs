@@ -21,7 +21,11 @@ namespace Academic.Infra.Data.DatabaseInitializer.DataImporter
         {
             //_enumTableCreator.CreateAndFillTable<SomeEnum>(Context);
 
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SqlScripts", nameof(Academic));
+            var initialPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            if (initialPath == null) throw new InvalidOperationException("Couldn't find project's path.");
+
+            var path = Path.Combine(initialPath, "SqlScripts", nameof(Academic));
 
             var allSqlFiles = GetFiles(path);
 
