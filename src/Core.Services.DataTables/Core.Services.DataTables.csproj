@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -16,6 +16,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Services.DataTables.Interfaces\Core.Services.DataTables.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.16.0.82469" />
   </ItemGroup>
 
 </Project>
